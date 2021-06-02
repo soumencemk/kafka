@@ -41,7 +41,7 @@ offset 2 of Partition0.
 
 A **broker** is a container that holds several topics with their multiple partitions
 
-![](https://static.javatpoint.com/tutorial/kafka/images/kafka-topics-2.png)
+      ![](https://static.javatpoint.com/tutorial/kafka/images/kafka-topics-2.png)
 
 Each broker is holding a topic, namely Topic-x with three partitions 0,1 and 2. Remember, all partitions do not belong
 to one broker only, it is always distributed among each broker (depends on the quantity). Broker 1 and Broker 2 contains
@@ -78,4 +78,46 @@ A producer uses following strategies to write data to the cluster:
 * **Acknowledgment**
     * `acks=0`: Producer doesn't wait for acknowledgement, data loss can happen
     * `acks=1`: Producer will wait for the leader's acknowledgement
-    * `acks=ALL`: Acknowledgment is done by both the leader and its followers 
+    * `acks=ALL`: Acknowledgment is done by both the leader and its followers
+
+### Consumer
+
+#### Consumer Groups
+
+Each consumer present in a group reads data directly from the exclusive partitions. In case, the number of consumers are
+more than the number of partitions, some consumers will be in an inactive state. if we lose any active consumer within
+the group then the inactive one can take over and will come in an active state to read the data. consumers within a
+group automatically use a `GroupCoordinator` and one `ConsumerCoordinator`, which assigns a consumer to a partition.
+This feature is already implemented in the Kafka. Therefore, the user does not need to worry about it.
+
+* **_Example 1 :_** Consider two groups of consumers, i.e., **Consumer Group-1** and **Consumer Group-2**. Both the
+  consumers of Group 1 are reading data together but from different partitions. Both the consumers of Group 1 will
+  remain in an active state because they are reading the data in parallel.
+      ![](https://static.javatpoint.com/tutorial/kafka/images/apache-kafka-consumer-and-consumer-groups2.png)
+
+* **_Example 2 :_**
+  Consider another scenario where a consumer group has three consumers. Consumer 1 and Consumer 2 are present in an
+  active state. Consumer 1 is reading data from Partition 0 and Consumer 2 from Partition 1. As, there are only two topic-partitions available, but three consumers. Thus, Consumer 3 will remain in an inactive state until any of the active consumer leaves.
+         ![](https://static.javatpoint.com/tutorial/kafka/images/apache-kafka-consumer-and-consumer-groups3.png)  
+
+#### Consumer offsets
+
+Apache Kafka provides a convenient feature to store an offset value for a consumer group. It stores an offset value to
+know at which partition, the consumer group is reading the data. As soon as a consumer in a group reads data, Kafka
+automatically commits the offsets, or it can be programmed. These offsets are committed live in a topic known
+as `__consumer_offsets`.
+
+This feature was implemented in the case of a machine failure where a consumer fails to read the data. So, the consumer
+will be able to continue reading from where it left off due to the commitment of the offset.
+
+#### Delivery semantics
+
+* **At most once:** Here, the offsets are committed as soon as the consumer receives the message.. But in case of
+  incorrect processing, the message will be lost, and the consumer will not be able to read further. Therefore, this
+  semantic is the least preferred one.
+* **At least once:** Here, the offsets are committed after the message has been processed. If the processing goes wrong,
+  then the message will be read again by the consumer. Therefore, this is usually preferred to use. Because a consumer
+  can read the message twice, it results in duplicate processing of the messages. Thus, it needs a system to be an
+  idempotent system.
+* **Exactly once:** Here, the offsets can be achieved for Kafka to Kafka workflow only using the Kafka Streams API. For
+  achieving offset for Kafka to the external system, we need to use an idempotent consumer.
