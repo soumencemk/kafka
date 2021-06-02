@@ -41,7 +41,7 @@ offset 2 of Partition0.
 
 A **broker** is a container that holds several topics with their multiple partitions
 
-      ![](https://static.javatpoint.com/tutorial/kafka/images/kafka-topics-2.png)
+![](https://static.javatpoint.com/tutorial/kafka/images/kafka-topics-2.png)
 
 Each broker is holding a topic, namely Topic-x with three partitions 0,1 and 2. Remember, all partitions do not belong
 to one broker only, it is always distributed among each broker (depends on the quantity). Broker 1 and Broker 2 contains
@@ -93,12 +93,14 @@ This feature is already implemented in the Kafka. Therefore, the user does not n
 * **_Example 1 :_** Consider two groups of consumers, i.e., **Consumer Group-1** and **Consumer Group-2**. Both the
   consumers of Group 1 are reading data together but from different partitions. Both the consumers of Group 1 will
   remain in an active state because they are reading the data in parallel.
-      ![](https://static.javatpoint.com/tutorial/kafka/images/apache-kafka-consumer-and-consumer-groups2.png)
+  ![](https://static.javatpoint.com/tutorial/kafka/images/apache-kafka-consumer-and-consumer-groups2.png)
 
 * **_Example 2 :_**
   Consider another scenario where a consumer group has three consumers. Consumer 1 and Consumer 2 are present in an
-  active state. Consumer 1 is reading data from Partition 0 and Consumer 2 from Partition 1. As, there are only two topic-partitions available, but three consumers. Thus, Consumer 3 will remain in an inactive state until any of the active consumer leaves.
-         ![](https://static.javatpoint.com/tutorial/kafka/images/apache-kafka-consumer-and-consumer-groups3.png)  
+  active state. Consumer 1 is reading data from Partition 0 and Consumer 2 from Partition 1. As, there are only two
+  topic-partitions available, but three consumers. Thus, Consumer 3 will remain in an inactive state until any of the
+  active consumer leaves.
+  ![](https://static.javatpoint.com/tutorial/kafka/images/apache-kafka-consumer-and-consumer-groups3.png)
 
 #### Consumer offsets
 
@@ -121,3 +123,9 @@ will be able to continue reading from where it left off due to the commitment of
   idempotent system.
 * **Exactly once:** Here, the offsets can be achieved for Kafka to Kafka workflow only using the Kafka Streams API. For
   achieving offset for Kafka to the external system, we need to use an idempotent consumer.
+
+### Architecture
+
+![architecture](https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_700,h_540/https://24b4dt1v60e526bo2p349l4c-wpengine.netdna-ssl.com/wp-content/uploads/2020/05/image1.png)
+
+![architecture](https://static.javatpoint.com/tutorial/kafka/images/apache-kafka-architecture3.png)
