@@ -126,6 +126,6 @@ will be able to continue reading from where it left off due to the commitment of
 
 ### Architecture
 
-![](https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_700,h_540/https://24b4dt1v60e526bo2p349l4c-wpengine.netdna-ssl.com/wp-content/uploads/2020/05/image1.png)
+![architecture](https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_700,h_540/https://24b4dt1v60e526bo2p349l4c-wpengine.netdna-ssl.com/wp-content/uploads/2020/05/image1.png)
 
-![](https://static.javatpoint.com/tutorial/kafka/images/apache-kafka-architecture3.png)
+![architecture](https://static.javatpoint.com/tutorial/kafka/images/apache-kafka-architecture3.png)
