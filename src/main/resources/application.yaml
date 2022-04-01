@@ -1,13 +1,14 @@
 server:
-  port: 9000
+  port: 0
 spring:
   kafka:
     consumer:
-      group-id: soumen_test
+      group-id: cg_soumen_local
       bootstrap-servers: iopref-kafka-1:9092
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      client-id: test
     producer:
       bootstrap-servers: iopref-kafka-1:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer

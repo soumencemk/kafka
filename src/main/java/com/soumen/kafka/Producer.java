@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class Producer {
 
-    private static final String TOPIC = "users";
+    private static final String TOPIC = "test_soumen";
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendMessage(String message) {
-        log.info("Producing message : {}", message);
+        log.debug("Producing message : {}", message);
         this.kafkaTemplate.send(TOPIC, message);
     }
 
